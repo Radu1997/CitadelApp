@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Citadel</string>
+    <string name="loginText">Not a memeber? Sign up now!</string>
+    <string name="registerText">Already registered? Login me!</string>
+
+    <string name="question1"></string>
+    <string name="question2"></string>
+    <string name="question3"></string>
+    <string name="question4"></string>
+    <string name="question5"></string>
+    <string name="question6"></string>
+    <string name="question7">Friday Night! You want to go out with your friends, where do you go?</string>
+    <string name="question8"></string>
+    <string name="question9"></string>
+
+    <string name="question10">Spicy food?</string>
+    <string name="answer10a">YES!</string>
+    <string name="answer10b">It\'s ok I guess</string>
+    <string name="answer10c">No way!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
