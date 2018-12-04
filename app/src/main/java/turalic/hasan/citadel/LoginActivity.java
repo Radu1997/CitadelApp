@@ -94,10 +94,12 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 /*
                 SendLogin sendLogin = new SendLogin();
                 sendLogin.execute();
                 */
+
                 Intent intent = new Intent(LoginActivity.this, QuizActivity.class);
                 finish();
                 startActivity(intent);
@@ -130,9 +132,15 @@ public class LoginActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            /*
+            SendLogin sendLogin = new SendLogin();
+            sendLogin.execute();
+            */
+
+            Intent intent = new Intent(LoginActivity.this, QuizActivity.class);
             finish();
             startActivity(intent);
+
 
             Log.d(TAG, "IT WORKED");
             // Signed in successfully, show authenticated UI.
@@ -175,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
 
-                URL url = new URL("http://URL:PORT/login");
+                URL url = new URL("http://10.181.103.96:8080/login");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
@@ -209,6 +217,8 @@ public class LoginActivity extends AppCompatActivity {
                     response.append(line);
                     response.append('\r');
                 }
+                Log.d(TAG, response.toString());
+                Log.d(TAG, response.toString());
                 rd.close();
                 return response.toString();
 
