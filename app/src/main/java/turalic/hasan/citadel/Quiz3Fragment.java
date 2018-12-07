@@ -12,6 +12,7 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 public class Quiz3Fragment extends Fragment implements View.OnClickListener {
 
+    String question;
     String answer1;
     String answer2;
     String answer3;
@@ -20,7 +21,8 @@ public class Quiz3Fragment extends Fragment implements View.OnClickListener {
     Button button2;
     Button button3;
 
-    public Quiz3Fragment(String answer1, String answer2, String answer3){
+    public Quiz3Fragment(String question, String answer1, String answer2, String answer3){
+        this.question = question;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
@@ -40,9 +42,9 @@ public class Quiz3Fragment extends Fragment implements View.OnClickListener {
         button2.setText(answer2);
 
         button3 = retView.findViewById(R.id.quiz3btn3);
-        button3.setText(answer2);
+        button3.setText(answer3);
 
-        ((QuizActivity)getActivity()).setText1("xD");
+        ((QuizActivity)getActivity()).setText1(question);
 
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);

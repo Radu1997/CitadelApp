@@ -38,30 +38,22 @@ import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button loginBtn;
-    EditText loginMail;
-    EditText loginPw;
-    TextView loginText;
-
     private static final String TAG = "LoginActivity";
 
     GoogleSignInClient mGoogleSignInClient;
+    SignInButton signInButton;
+    GoogleSignInAccount GoogleAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // remove title
+        // Remove Title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_login);
-
-        loginBtn = findViewById(R.id.loginBtn);
-        loginMail = findViewById(R.id.loginMail);
-        loginPw = findViewById(R.id.loginPw);
-        loginText = findViewById(R.id.loginTxt);
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -72,41 +64,14 @@ public class LoginActivity extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        SignInButton signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
-
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+        signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
         });
-
-        loginText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                finish();
-                startActivity(intent);
-            }
-        });
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /*
-                SendLogin sendLogin = new SendLogin();
-                sendLogin.execute();
-                */
-
-                Intent intent = new Intent(LoginActivity.this, QuizActivity.class);
-                finish();
-                startActivity(intent);
-            }
-        });
-
-
     }
 
     private void signIn() {
@@ -130,50 +95,37 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            /*
-            SendLogin sendLogin = new SendLogin();
-            sendLogin.execute();
-            */
+            // Signed in successfully, show authenticated UI.
+            Log.d(TAG, "GoogleSignIn: Successful");
+            GoogleAccount = completedTask.getResult(ApiException.class);
 
             Intent intent = new Intent(LoginActivity.this, QuizActivity.class);
             finish();
             startActivity(intent);
 
-
-            Log.d(TAG, "IT WORKED");
-            // Signed in successfully, show authenticated UI.
-            //updateUI(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            //updateUI(null);
+            Log.w(TAG, "GoogleSignIn: Failed code=" + e.getStatusCode());
         }
     }
 
     @Override
     protected void onStart() {
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
+        // Check for existing Google Sign In account, if the user is already signed in the GoogleSignInAccount will be non-null.
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null) {
-            //TODO
+            /*
+            Intent intent = new Intent(LoginActivity.this, QuizActivity.class);
+            finish();
+            startActivity(intent);
+            */
         }
     }
 
     private JSONObject loginObject(){
         JSONObject loginObject = new JSONObject();
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("Mail", loginMail.getText().toString());
-            jsonObject.put("Password", loginPw.getText().toString());
-            loginObject.put("Login", jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         return loginObject;
     }
 
