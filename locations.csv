@@ -1,0 +1,9 @@
+type,open_now,price_range,age_range,origin,music,loudness,vegan_friendly,children_friendly, payment_methods
+restaurant,yes,2,2,european,background,2,yes,yes,1
+nightclub,yes,3,1,,techno,5,yes,no,0
+bar,yes,2,1,,rock,3,yes,no,1
+restaurant,no,3,3,asian,background,1,yes,yes,1
+bar,yes,3,2,,hip-hop,3,yes,no,0
+nightclub,no,3,2,,techno,5,yes,no,0
+cafe,yes,2,2,american,background,1,yes,yes,1
+bar,no,1,1,,rock,2,yes,no,0
